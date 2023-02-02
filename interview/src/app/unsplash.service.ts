@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, throwError, of } from 'rxjs';
-import { catchError, retry } from 'rxjs/operators';
+import { Observable, throwError, of, Subscription } from 'rxjs';
+import { map, catchError, retry } from 'rxjs/operators';
+import { PhotoSearch,Photo } from './photo';
 
 @Injectable({
   providedIn: 'root'
@@ -23,8 +24,8 @@ export class UnsplashService {
     let xPix = (x) ? x : 500
     let yPix = (y) ? y : 500
     //parses url to include x and y dimensions as well as the search term if there is one.
-    let apiURL = `https://source.unsplash.com/random/${xPix}x${yPix}/${ searchTerm ? `?${searchTerm}` : ''}`
-
+    //let apiURL = `https://source.unsplash.com/random/${xPix}x${yPix}/${ searchTerm ? `?${searchTerm}` : ''}`
+    let apiURL = `https://api.unsplash.com/photos/random?query=${ searchTerm ? `${searchTerm}` : ''}`
     return this.http.get<string>(apiURL)
     .pipe(
       catchError(e => of(e["url"]))
@@ -39,17 +40,13 @@ export class UnsplashService {
    * @param y the requested y size in pixels
    * @returns 
    */
-  getRandomPhotos(n:number,searchTerm?:string | undefined,x?:number,y?:number):Observable<string[]>{
+  getRandomPhotos(n:number,searchTerm?:string | undefined,x?:number,y?:number):Observable<Photo[]>{
     let xPix = (x) ? x : 500
     let yPix = (y) ? y : 500
 
-    //parses url to include x and y dimensions as well as the search term if there is one. Rounds specified number to nearest whole number.
-    let apiURL = `https://api.unsplash.com/search/photos/?query=${ searchTerm ? `${searchTerm}` : ''}`
-    console.log(apiURL)
-    return this.http.get<string[]>(apiURL)
-    .pipe(
-      catchError(e => of(e["url"]))
-    );
+    //parses url to include x and y dimensions as well as the search term if there is one. Rounds specified number to nearest whole number
+    let apiURL = `https://api.unsplash.com/photos/random?query=${ searchTerm ? `${searchTerm}` : ''}&count=${n}`
+    return this.http.get<Photo[]>(apiURL)
   }
 
 }

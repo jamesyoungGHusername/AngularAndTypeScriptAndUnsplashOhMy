@@ -3,6 +3,9 @@ import { UnsplashService } from '../unsplash.service';
 import { FormBuilder,FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { ThisReceiver } from '@angular/compiler';
+import { PhotoSearch,Photo } from '../photo';
+import { map, catchError, retry } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-photo-widget',
@@ -12,20 +15,21 @@ import { ThisReceiver } from '@angular/compiler';
 export class PhotoWidgetComponent {
   public searchQuery = new FormControl('')
   public lastQuery = new FormControl('')
-  public randomImage:Observable<any> | undefined;
-  public photos:Observable<any[]> | undefined;
+  public photos:any[] = [];
 
   private refreshInterval: number = 2;
 
   constructor(
-    private service:UnsplashService
-
+    private service:UnsplashService,
+    
   ) {}
 
   ngOnInit(){
-    //this.randomImage = this.service.getRandomPhoto()
-    this.photos = this.service.getRandomPhotos(2,"chess")
-    console.log(this.photos)
+    this.service.getRandomPhotos(2,"chess").subscribe( newPhotos => {
+      console.log(newPhotos)
+      this.photos=newPhotos
+    })
+
     //this.startTimer()
     //this.onChanges();
   }
@@ -44,7 +48,7 @@ export class PhotoWidgetComponent {
         this.refreshInterval = 2;
         //checks every two seconds to see if the current search text is different from the previous search text. Calls api when search text is different.
         if (this.searchQuery.value != null && this.searchQuery.value != this.lastQuery.value){
-          this.randomImage = this.service.getRandomPhoto(this.searchQuery.value)
+          // this.randomImage = this.service.getRandomPhoto(this.searchQuery.value)
           this.lastQuery = this.searchQuery
         }
       }

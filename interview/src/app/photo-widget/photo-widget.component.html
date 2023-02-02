@@ -6,9 +6,11 @@
     <input id="search" type="text" [formControl]="searchQuery">
     <p>Value: {{ searchQuery.value }}</p>
     <!-- found explination of ng iteration on indepth.dev -->
-    <ng-template ngFor let-item [ngForOf]="photos | async">
-        <div>test</div>
-    </ng-template>
-    <img [src]="randomImage | async">
+    
+    <ng-container *ngFor="let photo of photos">
+        <img [src]="photo.urls.small"/>
+    </ng-container>
+    
+    <!-- <img [src]="randomImage | async"> -->
 </div>
 
