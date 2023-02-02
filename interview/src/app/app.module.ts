@@ -10,6 +10,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HTTP_INTERCEPTORS,HttpClientModule } from '@angular/common/http';
 import { AuthInterceptorService } from './auth-interceptor.service';
 
+import { ReactiveFormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +22,8 @@ import { AuthInterceptorService } from './auth-interceptor.service';
     AppRoutingModule,
     NgbModule,
     HttpClientModule,
+    ReactiveFormsModule,
+    
   ],
   providers: [
     {

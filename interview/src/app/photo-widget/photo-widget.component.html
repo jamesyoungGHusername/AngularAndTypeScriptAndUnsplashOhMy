@@ -1,1 +1,10 @@
-<img [src]="randomImage | async">
+
+
+<div>
+    <!-- found form control on angular docs -->
+    <label for="search">Search: </label>
+    <input id="search" type="text" [formControl]="searchQuery">
+    <p>Value: {{ searchQuery.value }}</p>
+    <img [src]="randomImage | async">
+</div>
+

@@ -19,7 +19,7 @@ export class UnsplashService {
    * @param x x size in pixels, default 500
    * @param y y size in pixels, default 500
    */
-  getRandomPhoto(searchTerm?:string,x?:number,y?:number):Observable<string>{
+  getRandomPhoto(searchTerm?:string | null | undefined,x?:number,y?:number):Observable<string>{
     let xPix = (x) ? x : 500
     let yPix = (y) ? y : 500
     //parses url to include x and y dimensions as well as the search term if there is one.
