@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component,OnInit } from '@angular/core';
+import { UnsplashService } from '../unsplash.service';
+import { FormBuilder } from '@angular/forms';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-photo-widget',
