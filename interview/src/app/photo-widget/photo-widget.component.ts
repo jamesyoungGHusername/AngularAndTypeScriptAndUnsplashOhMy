@@ -10,4 +10,15 @@ import { Observable } from 'rxjs';
 })
 export class PhotoWidgetComponent {
 
+  public randomImage:Observable<any> | undefined;
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private service:UnsplashService
+  ) {}
+
+  ngOnInit(){
+    this.randomImage = this.service.getRandomPhoto()
+  }
+
 }
