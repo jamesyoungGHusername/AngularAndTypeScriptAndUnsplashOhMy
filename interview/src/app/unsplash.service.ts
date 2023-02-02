@@ -22,9 +22,8 @@ export class UnsplashService {
   getRandomPhoto(searchTerm?:string,x?:number,y?:number):Observable<string>{
     let xPix = (x) ? x : 500
     let yPix = (y) ? y : 500
-    
     //parses url to include x and y dimensions as well as the search term if there is one.
-    let apiURL = `https://source.unsplash.com/random/${x}x${y}/${ searchTerm ? `?${searchTerm}` : ''}`
+    let apiURL = `https://source.unsplash.com/random/${xPix}x${yPix}/${ searchTerm ? `?${searchTerm}` : ''}`
 
     return this.http.get<string>(apiURL)
     .pipe(
