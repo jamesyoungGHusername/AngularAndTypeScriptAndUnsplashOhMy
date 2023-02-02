@@ -18,7 +18,8 @@ import { AuthInterceptorService } from './auth-interceptor.service';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
   ],
   providers: [
     {
