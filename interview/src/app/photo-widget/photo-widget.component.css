@@ -1,0 +1,9 @@
+.widgetContainer{
+    display: flex;
+    flex-direction: row;
+}
+.imageSearch{
+    display: flex;
+    flex-direction: column;
+    width: 30%;
+}

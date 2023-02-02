@@ -14,8 +14,10 @@ import { map, catchError, retry } from 'rxjs/operators';
 })
 export class PhotoWidgetComponent {
   public searchQuery = new FormControl('')
-  public lastQuery = new FormControl('')
+  public lastQuery = ''
   public photos:any[] = [];
+
+  public selectedPhotos = FormControl('')
 
   private refreshInterval: number = 2;
 
@@ -25,18 +27,18 @@ export class PhotoWidgetComponent {
   ) {}
 
   ngOnInit(){
-    this.service.getRandomPhotos(2,"chess").subscribe( newPhotos => {
+    this.service.getRandomPhotos(2,"").subscribe( newPhotos => {
       console.log(newPhotos)
       this.photos=newPhotos
     })
 
-    //this.startTimer()
-    //this.onChanges();
+    this.startTimer()
+    this.onChanges();
   }
 
   onChanges(): void {
     this.searchQuery.valueChanges.subscribe(val => {
-      
+      console.log(val)
     });
   }
   
@@ -46,10 +48,15 @@ export class PhotoWidgetComponent {
         this.refreshInterval--;
       } else {
         this.refreshInterval = 2;
+
         //checks every two seconds to see if the current search text is different from the previous search text. Calls api when search text is different.
-        if (this.searchQuery.value != null && this.searchQuery.value != this.lastQuery.value){
-          // this.randomImage = this.service.getRandomPhoto(this.searchQuery.value)
-          this.lastQuery = this.searchQuery
+        console.log(this.lastQuery)
+        console.log(this.searchQuery.value)
+        if (this.searchQuery.value != null && this.searchQuery.value != this.lastQuery){
+          this.service.getRandomPhotos(5,this.searchQuery.value).subscribe( newPhotos => {
+            this.photos=newPhotos
+          })
+          this.lastQuery = this.searchQuery.value
         }
       }
     },1000)
