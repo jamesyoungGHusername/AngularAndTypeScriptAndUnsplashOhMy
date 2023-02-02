@@ -44,8 +44,8 @@ export class UnsplashService {
     let yPix = (y) ? y : 500
 
     //parses url to include x and y dimensions as well as the search term if there is one. Rounds specified number to nearest whole number.
-    let apiURL = `https://source.unsplash.com/random/${xPix}x${yPix}/?sig=${Math.round(n)}${ searchTerm ? `&${searchTerm}` : ''}`
-
+    let apiURL = `https://api.unsplash.com/search/photos/?query=${ searchTerm ? `${searchTerm}` : ''}`
+    console.log(apiURL)
     return this.http.get<string[]>(apiURL)
     .pipe(
       catchError(e => of(e["url"]))

@@ -9,7 +9,7 @@ export class AuthInterceptorService implements HttpInterceptor {
     req = req.clone(
       {
         setHeaders: {
-          "Authorication": `Client-ID ${this.accesskey}`
+          "Authorization": `Client-ID ${this.accesskey}`
         }
       }
     );
