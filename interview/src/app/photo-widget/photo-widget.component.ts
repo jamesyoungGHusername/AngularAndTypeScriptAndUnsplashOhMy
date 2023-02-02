@@ -13,6 +13,7 @@ export class PhotoWidgetComponent {
   public searchQuery = new FormControl('')
   public lastQuery = new FormControl('')
   public randomImage:Observable<any> | undefined;
+  public photos:Observable<any[]> | undefined;
 
   private refreshInterval: number = 2;
 
@@ -22,9 +23,11 @@ export class PhotoWidgetComponent {
   ) {}
 
   ngOnInit(){
-    this.randomImage = this.service.getRandomPhoto()
-    this.startTimer()
-    this.onChanges();
+    //this.randomImage = this.service.getRandomPhoto()
+    this.photos = this.service.getRandomPhotos(2,"chess")
+    console.log(this.photos)
+    //this.startTimer()
+    //this.onChanges();
   }
 
   onChanges(): void {

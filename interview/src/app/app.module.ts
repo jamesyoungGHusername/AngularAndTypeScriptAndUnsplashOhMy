@@ -12,10 +12,11 @@ import { AuthInterceptorService } from './auth-interceptor.service';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    PhotoWidgetComponent
+    PhotoWidgetComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +24,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     NgbModule,
     HttpClientModule,
     ReactiveFormsModule,
-    
+
   ],
   providers: [
     {
