@@ -7,7 +7,7 @@
         <input id="search" type="text" [formControl]="searchQuery">
 
         <ng-container *ngFor="let photo of photos">
-            <img [src]="photo.urls.small"/>
+            <img [src]="photo.urls.small" (click)="selectPhoto(photo)"/>
         </ng-container>
     </div>
     <div class="imageSelections">

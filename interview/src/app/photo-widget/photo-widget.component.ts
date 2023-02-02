@@ -17,7 +17,9 @@ export class PhotoWidgetComponent {
   public lastQuery = ''
   public photos:any[] = [];
 
-  public selectedPhotos = FormControl('')
+  public selectedPhoto:any;
+
+
 
   private refreshInterval: number = 2;
 
@@ -60,6 +62,11 @@ export class PhotoWidgetComponent {
         }
       }
     },1000)
+  }
+
+  selectPhoto(photoObject:any){
+    console.log(photoObject)
+    this.selectPhoto = photoObject
   }
 
 }
